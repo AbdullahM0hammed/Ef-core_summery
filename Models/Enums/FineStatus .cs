@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Ef_core_summery.Models.Enums
 {
-    internal enum FineStatus
+    public enum FineStatus
     {
         Pending, Paid
     }

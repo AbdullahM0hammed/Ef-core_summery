@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Ef_core_summery.Models.Enums
 {
-    internal enum LoanStatus
+    public enum LoanStatus
     {
         Borrowed, Returned, Overdue
     }
