@@ -24,6 +24,11 @@ Description	Varchar With Max Length 100
             .HasColumnType("varchar")
             .HasMaxLength(100);
             ; 
+            //builder.Property(X => X.Id)
+            //    .ValueGeneratedNever();
+            builder.Property(x => x.Id)
+       .ValueGeneratedOnAdd(); // بدل ValueGeneratedNever
+
             #endregion
         }
     }

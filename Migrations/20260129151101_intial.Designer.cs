@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Ef_core_summery.Migrations
 {
     [DbContext(typeof(LibararyDbContext))]
-    [Migration("20260119004733_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20260129151101_intial")]
+    partial class intial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -214,7 +214,7 @@ namespace Ef_core_summery.Migrations
 
                     b.ToTable("Members", t =>
                         {
-                            t.HasCheckConstraint(" PhoneNumberCheck ", " PhoneNumber Like '01' And PhoneNumber Not LIKE '%[^0-9]%' ");
+                            t.HasCheckConstraint("PhoneNumberCheck", "PhoneNumber LIKE '01%' AND LEN(PhoneNumber) = 11 AND PhoneNumber NOT LIKE '%[^0-9]%'");
 
                             t.HasCheckConstraint("ValidEmailCheck", "Email Like '_%@_%._%' ");
                         });

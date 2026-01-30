@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Ef_core_summery.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class intial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -70,7 +70,7 @@ namespace Ef_core_summery.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Members", x => x.Id);
-                    table.CheckConstraint(" PhoneNumberCheck ", " PhoneNumber Like '01' And PhoneNumber Not LIKE '%[^0-9]%' ");
+                    table.CheckConstraint("PhoneNumberCheck", "PhoneNumber LIKE '01%' AND LEN(PhoneNumber) = 11 AND PhoneNumber NOT LIKE '%[^0-9]%'");
                     table.CheckConstraint("ValidEmailCheck", "Email Like '_%@_%._%' ");
                 });
 

@@ -39,9 +39,17 @@ namespace Ef_core_summery.Configrations
             builder.ToTable(Tb =>
             {
                 Tb.HasCheckConstraint("ValidEmailCheck", "Email Like '_%@_%._%' ");
-                Tb.HasCheckConstraint(" PhoneNumberCheck ", " PhoneNumber Like '01' And PhoneNumber Not LIKE '%[^0-9]%' ");
+                Tb.HasCheckConstraint(
+                    "PhoneNumberCheck",
+                    "PhoneNumber LIKE '01%' AND LEN(PhoneNumber) = 11 AND PhoneNumber NOT LIKE '%[^0-9]%'"
+                );
             }); 
             #endregion
+            //builder.Property(X => X.Id)
+            //    .ValueGeneratedNever();
+            builder.Property(x => x.Id)
+       .ValueGeneratedOnAdd(); // بدل ValueGeneratedNever
+
         }
     }
 }

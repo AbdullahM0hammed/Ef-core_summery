@@ -27,6 +27,7 @@ namespace Ef_core_summery.Configrations
                 Tb.HasCheckConstraint("AvailableCopiesCheck", "AvailableCopies <= TotalCopies");
             });
             #endregion
+
             #region Relationship
             builder.HasOne( X=>X.BookAuthor )
                 .WithMany(X=>X.AuthoredBooks)
@@ -38,6 +39,12 @@ namespace Ef_core_summery.Configrations
                 .HasForeignKey(X => X.CategoryID);
 
             #endregion
+
+            //builder.Property(X=>X.Id)
+            //    .ValueGeneratedNever();
+            builder.Property(x => x.Id)
+       .ValueGeneratedOnAdd(); // بدل ValueGeneratedNever
+
         }
     }
 }
