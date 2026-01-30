@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Ef_core_summery.Configrations.AuthorConfig" BaseTypeListCollapsed="true">
+    <Position X="7.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Configrations\AuthorConfig.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Ef_core_summery.Configrations.BookConfig" BaseTypeListCollapsed="true">
+    <Position X="9.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Configrations\BookConfig.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Ef_core_summery.Configrations.CategoryConfig" BaseTypeListCollapsed="true">
+    <Position X="7.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Configrations\CategoryConfig.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Ef_core_summery.Configrations.FineConfig" BaseTypeListCollapsed="true">
+    <Position X="11.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Configrations\FineConfig.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Ef_core_summery.Configrations.LoanConfig" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Configrations\LoanConfig.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Ef_core_summery.Configrations.MemberConfig" BaseTypeListCollapsed="true">
+    <Position X="2.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Configrations\MemberConfig.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Ef_core_summery.Configrations.MemberLoansConfigcs" BaseTypeListCollapsed="true">
+    <Position X="5.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Configrations\MemberLoansConfigcs.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Ef_core_summery.Models.Author">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAMAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>Models\Author .cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ef_core_summery.Models.BaseEntity">
+    <Position X="6.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\BaseEntity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ef_core_summery.Models.Book">
+    <Position X="8.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAASAQAAAGAAAAQIQAAACAAAAAAAAAAAAIAAAAA=</HashCode>
+      <FileName>Models\Book .cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ef_core_summery.Models.Category">
+    <Position X="10" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAEAAAAAAAAAAAAAAAAAAAAQAAAAAAAA=</HashCode>
+      <FileName>Models\Category .cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ef_core_summery.Models.Fine">
+    <Position X="11.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAEBAAAAAAAAAAAAACAAAAAAAAABABAAAAAAAA=</HashCode>
+      <FileName>Models\Fine .cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ef_core_summery.Models.Loan">
+    <Position X="2.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAQAAEAgAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Loan .cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ef_core_summery.Models.Member">
+    <Position X="4.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAQAAAAAACIAAAAAAAAAQAQAAAIAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Member .cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ef_core_summery.Models.MemberLoans">
+    <Position X="4" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAACgAAAAAAACBAAAAAAAAAAAAIAAAAAABAAAABAAA=</HashCode>
+      <FileName>Models\MemberLoans.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ef_core_summery.Contexts.LibararyDbContext">
+    <Position X="2.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAQAAAAAAAAAAAAAAkABAEAAAAAAEEAAAAIA=</HashCode>
+      <FileName>Contexts\LibararyDbContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ef_core_summery.Contexts.LibararyDbContextSeed">
+    <Position X="5.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAA=</HashCode>
+      <FileName>Contexts\LibararyDbContextSeed.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ef_core_summery.Migrations.intial">
+    <Position X="0.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAI=</HashCode>
+      <FileName>Migrations\20260129151101_intial.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ef_core_summery.Migrations.LibararyDbContextModelSnapshot">
+    <Position X="4" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>Migrations\LibararyDbContextModelSnapshot.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="Ef_core_summery.Models.Enums.FineStatus">
+    <Position X="8" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>Models\Enums\FineStatus .cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Ef_core_summery.Models.Enums.LoanStatus">
+    <Position X="9.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAAhAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Enums\LoanStatus .cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Ef_core_summery.Models.Enums.MemberStatus">
+    <Position X="11.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Enums\MemberStatus .cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Arial" Size="10" />
+</ClassDiagram>
