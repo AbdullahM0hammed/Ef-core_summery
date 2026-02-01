@@ -1242,3 +1242,1226 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 **Made with ❤️ by Abdullah**
 
 </div>
+
+<div align="center">
+
+# 🚀 Getting Started with Entity Framework Core
+
+### *A comprehensive guide to mastering EF Core for .NET developers*
+
+[![.NET](https://img.shields.io/badge/.NET-512BD4?style=for-the-badge&logo=dotnet&logoColor=white)](https://dotnet.microsoft.com/)
+[![Entity Framework](https://img.shields.io/badge/Entity%20Framework-512BD4?style=for-the-badge&logo=.net&logoColor=white)](https://docs.microsoft.com/en-us/ef/core/)
+[![C#](https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white)](https://docs.microsoft.com/en-us/dotnet/csharp/)
+[![SQL Server](https://img.shields.io/badge/SQL%20Server-CC2927?style=for-the-badge&logo=microsoft-sql-server&logoColor=white)](https://www.microsoft.com/en-us/sql-server)
+
+---
+
+</div>
+
+## 📚 Table of Contents
+
+<details>
+<summary>Click to expand</summary>
+
+- [🎯 Introduction](#-introduction)
+- [🔄 What is an ORM?](#-what-is-an-orm)
+- [⚖️ EF Core vs ADO.NET vs Dapper](#️-ef-core-vs-adonet-vs-dapper)
+- [🧩 Core Components](#-core-components)
+- [🔍 LINQ in EF Core](#-linq-in-ef-core)
+- [🔧 Migrations](#-migrations)
+- [🗺️ Entity Mapping](#️-entity-mapping)
+- [📊 Entity States](#-entity-states)
+- [🔗 Relationships](#-relationships)
+- [📥 Loading Related Data](#-loading-related-data)
+- [🌱 Data Seeding](#-data-seeding)
+- [🧬 Inheritance Strategies](#-inheritance-strategies)
+- [💾 Database First Approach](#-database-first-approach)
+- [⚡ Raw SQL Queries](#-raw-sql-queries)
+- [🎓 Advanced Features](#-advanced-features)
+
+</details>
+
+---
+
+## 🎯 Introduction
+
+> **Entity Framework Core (EF Core)** is a modern, lightweight, and extensible Object-Relational Mapper (ORM) for .NET that enables developers to work with databases using .NET objects, eliminating the need for most data-access code.
+
+<div align="center">
+
+```mermaid
+graph LR
+    A[C# Objects] -->|EF Core| B[LINQ Queries]
+    B -->|Translation| C[SQL Commands]
+    C -->|Execution| D[(Database)]
+    D -->|Results| A
+```
+
+</div>
+
+### 🎨 Key Benefits
+
+| Feature | Description |
+|---------|-------------|
+| 🎯 **Type Safety** | Compile-time checking with IntelliSense support |
+| 🔄 **Change Tracking** | Automatic detection of entity modifications |
+| 📊 **LINQ Support** | Write queries in C# instead of SQL |
+| 🔧 **Migrations** | Version control for your database schema |
+| 🌐 **Multi-Database** | Support for multiple database providers |
+
+### 💡 Supported Database Providers
+
+<div align="center">
+
+| Database | Logo | Status |
+|----------|------|--------|
+| SQL Server | 🗄️ | ✅ Fully Supported |
+| PostgreSQL | 🐘 | ✅ Fully Supported |
+| MySQL | 🐬 | ✅ Fully Supported |
+| SQLite | 📱 | ✅ Fully Supported |
+| Oracle | 🔶 | ✅ Fully Supported |
+| Cosmos DB | 🌌 | ✅ Fully Supported |
+
+</div>
+
+---
+
+## 🔄 What is an ORM?
+
+> An **Object-Relational Mapper (ORM)** is a technique that lets you query and manipulate data from a database using an object-oriented paradigm.
+
+<div align="center">
+
+```mermaid
+graph TD
+    A[Object-Oriented World] -->|ORM Mapping| B[Relational Database World]
+    C[Classes] -.->|Maps to| D[Tables]
+    E[Properties] -.->|Maps to| F[Columns]
+    G[Objects] -.->|Maps to| H[Rows]
+    I[Methods] -.->|Maps to| J[Stored Procedures]
+```
+
+</div>
+
+### 🔄 The Mapping Process
+
+<table align="center">
+<tr>
+<th>🎯 Object-Oriented</th>
+<th>🔗</th>
+<th>💾 Relational Database</th>
+</tr>
+<tr>
+<td><code>Classes</code></td>
+<td>➡️</td>
+<td><code>Tables</code></td>
+</tr>
+<tr>
+<td><code>Properties</code></td>
+<td>➡️</td>
+<td><code>Columns</code></td>
+</tr>
+<tr>
+<td><code>Objects</code></td>
+<td>➡️</td>
+<td><code>Rows</code></td>
+</tr>
+<tr>
+<td><code>References</code></td>
+<td>➡️</td>
+<td><code>Foreign Keys</code></td>
+</tr>
+</table>
+
+### ✨ How It Works
+
+```csharp
+// Instead of writing SQL like this:
+string sql = "SELECT * FROM Products WHERE Price > 100";
+
+// You write C# code like this:
+var products = context.Products
+    .Where(p => p.Price > 100)
+    .ToList();
+```
+
+**EF Core automatically translates LINQ queries into optimized SQL commands!** 🚀
+
+---
+
+## ⚖️ EF Core vs ADO.NET vs Dapper
+
+<div align="center">
+
+```mermaid
+graph TB
+    subgraph "Performance vs Productivity"
+    A[ADO.NET<br/>⚡ Fastest] 
+    B[Dapper<br/>⚡ Very Fast]
+    C[EF Core<br/>🎯 Most Productive]
+    end
+```
+
+</div>
+
+### 📊 Detailed Comparison
+
+<table>
+<tr>
+<th width="25%">Feature</th>
+<th width="25%">🔧 ADO.NET</th>
+<th width="25%">⚡ Dapper</th>
+<th width="25%">🚀 Entity Framework Core</th>
+</tr>
+<tr>
+<td><strong>Performance</strong></td>
+<td>🟢 Excellent<br/><small>Raw speed</small></td>
+<td>🟢 Excellent<br/><small>Near ADO.NET</small></td>
+<td>🟡 Good<br/><small>Acceptable overhead</small></td>
+</tr>
+<tr>
+<td><strong>Ease of Use</strong></td>
+<td>🔴 Complex<br/><small>Lots of boilerplate</small></td>
+<td>🟡 Moderate<br/><small>Need SQL knowledge</small></td>
+<td>🟢 Easy<br/><small>LINQ & Abstraction</small></td>
+</tr>
+<tr>
+<td><strong>Change Tracking</strong></td>
+<td>❌ No</td>
+<td>❌ No</td>
+<td>✅ Yes</td>
+</tr>
+<tr>
+<td><strong>Migrations</strong></td>
+<td>❌ No</td>
+<td>❌ No</td>
+<td>✅ Yes</td>
+</tr>
+<tr>
+<td><strong>LINQ Support</strong></td>
+<td>❌ No</td>
+<td>⚠️ Limited</td>
+<td>✅ Full</td>
+</tr>
+<tr>
+<td><strong>Learning Curve</strong></td>
+<td>🔴 Steep</td>
+<td>🟡 Moderate</td>
+<td>🟢 Gentle</td>
+</tr>
+<tr>
+<td><strong>Best For</strong></td>
+<td>🎯 Maximum control<br/>🎯 High performance critical</td>
+<td>🎯 Micro-services<br/>🎯 Simple CRUD</td>
+<td>🎯 Complex apps<br/>🎯 Rapid development</td>
+</tr>
+</table>
+
+### 💡 When to Use Each?
+
+```mermaid
+graph LR
+    A{Your Project} -->|Need Max Performance?| B[ADO.NET]
+    A -->|Simple & Fast?| C[Dapper]
+    A -->|Complex & Maintainable?| D[EF Core]
+    
+    style B fill:#ff6b6b
+    style C fill:#4ecdc4
+    style D fill:#45b7d1
+```
+
+<details>
+<summary><b>👉 Click for detailed recommendations</b></summary>
+
+**Choose ADO.NET when:**
+- ⚡ Performance is critical (high-traffic systems)
+- 🎯 You need complete control over SQL
+- 🔧 Working with legacy systems
+- 📊 Handling large bulk operations
+
+**Choose Dapper when:**
+- ⚡ You want speed with less boilerplate than ADO.NET
+- 🎯 You're comfortable writing SQL
+- 🏗️ Building microservices or APIs
+- 📦 You need a lightweight solution
+
+**Choose EF Core when:**
+- 🚀 Rapid development is a priority
+- 🎯 Complex domain models and relationships
+- 🔄 You want automatic change tracking
+- 🗂️ Database migrations are needed
+- 👥 Team has varying SQL skill levels
+
+</details>
+
+---
+
+## 🧩 Core Components
+
+<div align="center">
+
+```mermaid
+graph TB
+    A[🎯 DbContext] --> B[📊 DbSet]
+    B --> C[🏗️ Entity]
+    A --> D[🔄 Change Tracker]
+    D --> C
+    
+    style A fill:#667eea
+    style B fill:#764ba2
+    style C fill:#f093fb
+    style D fill:#4facfe
+```
+
+</div>
+
+### 1️⃣ Entity (POCO Class)
+
+> A Plain Old CLR Object that represents a database table
+
+```csharp
+/// <summary>
+/// Product entity representing the Products table
+/// </summary>
+public class Product
+{
+    public int Id { get; set; }                    // Primary Key
+    public string Name { get; set; }               // Product name
+    public decimal Price { get; set; }             // Product price
+    public DateTime CreatedAt { get; set; }        // Creation timestamp
+    
+    // Navigation Property
+    public Category Category { get; set; }
+}
+```
+
+<div align="center">
+
+| C# Entity | Database Table |
+|-----------|----------------|
+| `Product` class | `Products` table |
+| `Id` property | `Id` column (PK) |
+| `Name` property | `Name` column |
+| `Price` property | `Price` column |
+
+</div>
+
+---
+
+### 2️⃣ DbContext
+
+> The main class that coordinates EF Core functionality for your data model
+
+```csharp
+/// <summary>
+/// Application database context
+/// </summary>
+public class AppDbContext : DbContext
+{
+    // DbSet properties - each represents a table
+    public DbSet<Product> Products { get; set; }
+    public DbSet<Category> Categories { get; set; }
+    public DbSet<Order> Orders { get; set; }
+    
+    /// <summary>
+    /// Configure database connection
+    /// </summary>
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.UseSqlServer(
+            "Server=.;Database=MyStore;Trusted_Connection=True;"
+        );
+    }
+    
+    /// <summary>
+    /// Configure entity models
+    /// </summary>
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        // Fluent API configurations
+        modelBuilder.Entity<Product>()
+            .HasOne(p => p.Category)
+            .WithMany(c => c.Products)
+            .HasForeignKey(p => p.CategoryId);
+    }
+}
+```
+
+**🎯 DbContext Responsibilities:**
+- 🔌 Database connection management
+- 📊 Querying and saving data
+- 🔄 Change tracking
+- 💾 Transaction management
+- 🗺️ Model configuration
+
+---
+
+### 3️⃣ DbSet<TEntity>
+
+> Represents a collection of entities (a table in the database)
+
+```csharp
+public class AppDbContext : DbContext
+{
+    // Each DbSet represents a table
+    public DbSet<Product> Products { get; set; }      // Products table
+    public DbSet<Category> Categories { get; set; }   // Categories table
+}
+
+// Usage:
+using var context = new AppDbContext();
+
+// Query all products
+var allProducts = context.Products.ToList();
+
+// Add new product
+context.Products.Add(new Product { Name = "Laptop", Price = 999.99m });
+context.SaveChanges();
+```
+
+---
+
+### 4️⃣ Change Tracker
+
+> Automatically tracks changes made to entities
+
+```csharp
+using var context = new AppDbContext();
+
+// Load entity
+var product = context.Products.Find(1);
+
+// Change Tracker: State = Unchanged
+Console.WriteLine(context.Entry(product).State); // Unchanged
+
+// Modify entity
+product.Price = 1299.99m;
+
+// Change Tracker: State = Modified
+Console.WriteLine(context.Entry(product).State); // Modified
+
+// Save changes
+context.SaveChanges(); // Generates UPDATE SQL
+
+// Change Tracker: State = Unchanged
+Console.WriteLine(context.Entry(product).State); // Unchanged
+```
+
+<div align="center">
+
+**📊 Change Tracker Workflow**
+
+```mermaid
+stateDiagram-v2
+    [*] --> Detached: New object
+    Detached --> Added: context.Add()
+    Added --> Unchanged: SaveChanges()
+    Unchanged --> Modified: Modify property
+    Unchanged --> Deleted: context.Remove()
+    Modified --> Unchanged: SaveChanges()
+    Deleted --> Detached: SaveChanges()
+```
+
+</div>
+
+---
+
+## 🔍 LINQ in EF Core
+
+> **LINQ (Language Integrated Query)** allows you to write database queries using C# syntax with full IntelliSense support and compile-time checking.
+
+<div align="center">
+
+```mermaid
+graph LR
+    A[C# LINQ Query] -->|EF Core| B[Expression Tree]
+    B -->|Translation| C[SQL Query]
+    C -->|Execute| D[(Database)]
+    D -->|Results| E[C# Objects]
+    
+    style A fill:#a8edea
+    style B fill:#fed6e3
+    style C fill:#ffd3a5
+    style D fill:#cc95c0
+    style E fill:#7ed56f
+```
+
+</div>
+
+### 📚 LINQ Query Syntax Examples
+
+<table>
+<tr>
+<th width="50%">🎯 LINQ Query (C#)</th>
+<th width="50%">💾 Generated SQL</th>
+</tr>
+<tr>
+<td>
+
+```csharp
+// Filter products
+var products = context.Products
+    .Where(p => p.Price > 100)
+    .ToList();
+```
+
+</td>
+<td>
+
+```sql
+SELECT * 
+FROM Products 
+WHERE Price > 100
+```
+
+</td>
+</tr>
+<tr>
+<td>
+
+```csharp
+// Order by name
+var products = context.Products
+    .OrderBy(p => p.Name)
+    .ToList();
+```
+
+</td>
+<td>
+
+```sql
+SELECT * 
+FROM Products 
+ORDER BY Name
+```
+
+</td>
+</tr>
+<tr>
+<td>
+
+```csharp
+// Select specific columns
+var names = context.Products
+    .Select(p => p.Name)
+    .ToList();
+```
+
+</td>
+<td>
+
+```sql
+SELECT Name 
+FROM Products
+```
+
+</td>
+</tr>
+</table>
+
+### 🎯 Common LINQ Operations
+
+#### 1. **Filtering**
+```csharp
+// Single condition
+var expensiveProducts = context.Products
+    .Where(p => p.Price > 500)
+    .ToList();
+
+// Multiple conditions
+var filteredProducts = context.Products
+    .Where(p => p.Price > 100 && p.Price < 1000)
+    .Where(p => p.Name.Contains("Laptop"))
+    .ToList();
+
+// Complex conditions
+var products = context.Products
+    .Where(p => p.CategoryId == 1 || p.Price < 50)
+    .ToList();
+```
+
+#### 2. **Sorting**
+```csharp
+// Single sort
+var sorted = context.Products
+    .OrderBy(p => p.Price)
+    .ToList();
+
+// Multiple sorts
+var multiSort = context.Products
+    .OrderBy(p => p.CategoryId)
+    .ThenByDescending(p => p.Price)
+    .ToList();
+```
+
+#### 3. **Projection**
+```csharp
+// Anonymous type
+var productInfo = context.Products
+    .Select(p => new 
+    { 
+        p.Name, 
+        p.Price,
+        Discounted = p.Price * 0.9m
+    })
+    .ToList();
+
+// DTO
+var dtos = context.Products
+    .Select(p => new ProductDTO
+    {
+        ProductName = p.Name,
+        FinalPrice = p.Price
+    })
+    .ToList();
+```
+
+#### 4. **Aggregation**
+```csharp
+// Count
+int count = context.Products.Count();
+int expensiveCount = context.Products.Count(p => p.Price > 1000);
+
+// Sum, Average, Min, Max
+decimal total = context.Products.Sum(p => p.Price);
+decimal avg = context.Products.Average(p => p.Price);
+decimal min = context.Products.Min(p => p.Price);
+decimal max = context.Products.Max(p => p.Price);
+
+// GroupBy
+var grouped = context.Products
+    .GroupBy(p => p.CategoryId)
+    .Select(g => new
+    {
+        CategoryId = g.Key,
+        Count = g.Count(),
+        AveragePrice = g.Average(p => p.Price)
+    })
+    .ToList();
+```
+
+#### 5. **Joining**
+```csharp
+// Inner Join
+var query = from product in context.Products
+            join category in context.Categories 
+                on product.CategoryId equals category.Id
+            select new { product.Name, category.Title };
+
+// Using navigation properties (recommended)
+var products = context.Products
+    .Include(p => p.Category)
+    .Select(p => new { p.Name, CategoryName = p.Category.Title })
+    .ToList();
+```
+
+### ⚡ Query Execution
+
+<div align="center">
+
+| Method | Execution | Returns |
+|--------|-----------|---------|
+| `ToList()` | ✅ Immediate | `List<T>` |
+| `ToArray()` | ✅ Immediate | `T[]` |
+| `First()` | ✅ Immediate | `T` |
+| `Single()` | ✅ Immediate | `T` |
+| `Count()` | ✅ Immediate | `int` |
+| `Any()` | ✅ Immediate | `bool` |
+| `Where()` | ⏰ Deferred | `IQueryable<T>` |
+| `Select()` | ⏰ Deferred | `IQueryable<T>` |
+| `OrderBy()` | ⏰ Deferred | `IQueryable<T>` |
+
+</div>
+
+```csharp
+// ⏰ Deferred Execution - No database query yet
+var query = context.Products.Where(p => p.Price > 100);
+
+// ✅ Immediate Execution - Database query executed now
+var products = query.ToList();
+```
+
+### 💡 Best Practices
+
+<table>
+<tr>
+<th>❌ Don't</th>
+<th>✅ Do</th>
+</tr>
+<tr>
+<td>
+
+```csharp
+// Load all then filter in memory
+var all = context.Products.ToList();
+var filtered = all
+    .Where(p => p.Price > 100)
+    .ToList();
+```
+
+</td>
+<td>
+
+```csharp
+// Filter in database
+var filtered = context.Products
+    .Where(p => p.Price > 100)
+    .ToList();
+```
+
+</td>
+</tr>
+</table>
+
+---
+
+## 🔧 Migrations
+
+> Migrations provide a way to incrementally update the database schema to keep it in sync with your application's data model while preserving existing data.
+
+<div align="center">
+
+```mermaid
+graph LR
+    A[📝 Change Models] --> B[🔨 Add Migration]
+    B --> C[📋 Migration File]
+    C --> D[⚡ Update Database]
+    D --> E[✅ Schema Updated]
+    
+    style A fill:#ff6b6b
+    style B fill:#4ecdc4
+    style C fill:#45b7d1
+    style D fill:#96ceb4
+    style E fill:#6c5ce7
+```
+
+</div>
+
+### 📋 Migration Commands
+
+<table>
+<tr>
+<th width="40%">Command</th>
+<th width="60%">Description</th>
+</tr>
+<tr>
+<td>
+
+```bash
+Add-Migration InitialCreate
+```
+
+</td>
+<td>🔨 Creates a new migration with your model changes</td>
+</tr>
+<tr>
+<td>
+
+```bash
+Update-Database
+```
+
+</td>
+<td>⚡ Applies pending migrations to the database</td>
+</tr>
+<tr>
+<td>
+
+```bash
+Remove-Migration
+```
+
+</td>
+<td>🗑️ Removes the last migration (if not applied)</td>
+</tr>
+<tr>
+<td>
+
+```bash
+Update-Database -Migration:0
+```
+
+</td>
+<td>↩️ Reverts all migrations</td>
+</tr>
+<tr>
+<td>
+
+```bash
+Update-Database PreviousMigration
+```
+
+</td>
+<td>⏮️ Rolls back to a specific migration</td>
+</tr>
+<tr>
+<td>
+
+```bash
+Script-Migration
+```
+
+</td>
+<td>📜 Generates SQL script for migrations</td>
+</tr>
+<tr>
+<td>
+
+```bash
+Get-Migration
+```
+
+</td>
+<td>📋 Lists all migrations</td>
+</tr>
+</table>
+
+### 🔄 Migration Workflow
+
+```mermaid
+sequenceDiagram
+    participant Dev as Developer
+    participant Model as Data Models
+    participant Mig as Migration
+    participant DB as Database
+    
+    Dev->>Model: 1. Modify entities
+    Dev->>Mig: 2. Add-Migration
+    Mig->>Mig: 3. Generate Up/Down methods
+    Dev->>DB: 4. Update-Database
+    DB->>DB: 5. Apply changes
+    DB-->>Dev: 6. Schema updated ✅
+```
+
+### 📝 Example: Complete Migration Flow
+
+#### Step 1: Create Initial Models
+```csharp
+public class Product
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public decimal Price { get; set; }
+}
+
+public class AppDbContext : DbContext
+{
+    public DbSet<Product> Products { get; set; }
+}
+```
+
+#### Step 2: Create Migration
+```bash
+# Package Manager Console
+Add-Migration InitialCreate
+
+# .NET CLI
+dotnet ef migrations add InitialCreate
+```
+
+#### Step 3: Review Generated Migration
+```csharp
+public partial class InitialCreate : Migration
+{
+    protected override void Up(MigrationBuilder migrationBuilder)
+    {
+        migrationBuilder.CreateTable(
+            name: "Products",
+            columns: table => new
+            {
+                Id = table.Column<int>(nullable: false)
+                    .Annotation("SqlServer:Identity", "1, 1"),
+                Name = table.Column<string>(nullable: true),
+                Price = table.Column<decimal>(nullable: false)
+            },
+            constraints: table =>
+            {
+                table.PrimaryKey("PK_Products", x => x.Id);
+            });
+    }
+
+    protected override void Down(MigrationBuilder migrationBuilder)
+    {
+        migrationBuilder.DropTable(name: "Products");
+    }
+}
+```
+
+#### Step 4: Apply Migration
+```bash
+# Package Manager Console
+Update-Database
+
+# .NET CLI
+dotnet ef database update
+```
+
+### 🗂️ Migration Files Structure
+
+```
+📁 Migrations/
+├── 📄 20240201120000_InitialCreate.cs          (Migration class)
+├── 📄 20240201120000_InitialCreate.Designer.cs (Migration metadata)
+├── 📄 20240215140000_AddCategory.cs
+├── 📄 20240215140000_AddCategory.Designer.cs
+└── 📄 AppDbContextModelSnapshot.cs             (Current model state)
+```
+
+### ⚙️ Advanced Migration Techniques
+
+#### Custom SQL in Migrations
+```csharp
+protected override void Up(MigrationBuilder migrationBuilder)
+{
+    migrationBuilder.Sql(@"
+        CREATE INDEX IX_Products_Name 
+        ON Products(Name);
+    ");
+    
+    migrationBuilder.Sql(@"
+        CREATE PROCEDURE GetExpensiveProducts
+        AS
+        SELECT * FROM Products WHERE Price > 1000
+    ");
+}
+```
+
+#### Data Migration
+```csharp
+protected override void Up(MigrationBuilder migrationBuilder)
+{
+    // Add new column
+    migrationBuilder.AddColumn<string>(
+        name: "Category",
+        table: "Products",
+        nullable: true);
+    
+    // Migrate existing data
+    migrationBuilder.Sql(@"
+        UPDATE Products 
+        SET Category = 'Uncategorized' 
+        WHERE Category IS NULL
+    ");
+    
+    // Make column required
+    migrationBuilder.AlterColumn<string>(
+        name: "Category",
+        table: "Products",
+        nullable: false);
+}
+```
+
+### 💡 Best Practices
+
+<div align="center">
+
+| ✅ Do | ❌ Don't |
+|-------|----------|
+| Review migrations before applying | Apply migrations blindly |
+| Use descriptive migration names | Use generic names like "Update1" |
+| Test migrations in dev environment | Test directly in production |
+| Keep migrations in source control | Delete old migrations |
+| Generate SQL scripts for production | Run Update-Database in production |
+
+</div>
+
+### 🎯 Snapshot File
+
+The **ModelSnapshot** file represents your current model state:
+
+```csharp
+[DbContext(typeof(AppDbContext))]
+partial class AppDbContextModelSnapshot : ModelSnapshot
+{
+    protected override void BuildModel(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity("Product", b =>
+        {
+            b.Property<int>("Id")
+                .ValueGeneratedOnAdd();
+            b.Property<string>("Name");
+            b.Property<decimal>("Price");
+            b.HasKey("Id");
+            b.ToTable("Products");
+        });
+    }
+}
+```
+
+> 📌 **Note:** The snapshot is used to detect changes between the current model and the database schema.
+
+---
+
+## Entity Mapping
+
+### 1. Convention-Based Mapping
+EF Core applies default rules automatically (e.g., `Id` property as primary key).
+
+### 2. Data Annotations
+Attributes added to classes for configuration.
+
+```csharp
+public class Product
+{
+    [Key]
+    public int ProductId { get; set; }
+    
+    [Required]
+    [MaxLength(100)]
+    public string Name { get; set; }
+    
+    [Column(TypeName = "decimal(18,2)")]
+    public decimal Price { get; set; }
+}
+```
+
+Common annotations:
+- `[Key]` - Primary key
+- `[Required]` - Not null
+- `[MaxLength]` - Column length
+- `[Table]` - Table name
+- `[Column]` - Column configuration
+
+### 3. Fluent API
+Used inside `OnModelCreating()` for advanced configurations.
+
+```csharp
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    modelBuilder.Entity<Product>()
+        .HasKey(p => p.ProductId);
+        
+    modelBuilder.Entity<Product>()
+        .Property(p => p.Name)
+        .IsRequired()
+        .HasMaxLength(100);
+}
+```
+
+Fluent API provides more control than Data Annotations.
+
+## Entity States
+
+EF Core tracks the following entity states:
+
+| State | Description |
+|-------|-------------|
+| **Added** | New entity, will be inserted |
+| **Modified** | Existing entity with changes, will be updated |
+| **Deleted** | Existing entity marked for deletion |
+| **Unchanged** | Existing entity with no changes |
+| **Detached** | Entity not tracked by context |
+
+These states determine SQL commands generated during `SaveChanges()`.
+
+## Relationships
+
+EF Core supports three types of relationships:
+
+### One-to-One (1:1)
+```csharp
+public class User
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public UserProfile Profile { get; set; }
+}
+
+public class UserProfile
+{
+    public int Id { get; set; }
+    public int UserId { get; set; }
+    public User User { get; set; }
+}
+```
+
+### One-to-Many (1:M)
+```csharp
+public class Category
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public ICollection<Product> Products { get; set; }
+}
+
+public class Product
+{
+    public int Id { get; set; }
+    public int CategoryId { get; set; }
+    public Category Category { get; set; }
+}
+```
+
+### Many-to-Many (M:M)
+```csharp
+public class Student
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public ICollection<Course> Courses { get; set; }
+}
+
+public class Course
+{
+    public int Id { get; set; }
+    public string Title { get; set; }
+    public ICollection<Student> Students { get; set; }
+}
+```
+
+Relationships are defined using:
+- Foreign keys
+- Navigation properties
+- Fluent API configurations
+
+## Loading Related Data
+
+### Eager Loading
+Uses `Include()` and `ThenInclude()` to load related data in a single query.
+
+```csharp
+var products = context.Products
+    .Include(p => p.Category)
+    .ThenInclude(c => c.Supplier)
+    .ToList();
+```
+
+**Benefits:** Reduces database round-trips
+
+### Explicit Loading
+Loads related data manually after querying the main entity.
+
+```csharp
+var product = context.Products.Find(1);
+context.Entry(product).Reference(p => p.Category).Load();
+```
+
+**Benefits:** More control over performance
+
+### Lazy Loading
+Loads related data only when accessed.
+
+```csharp
+var product = context.Products.Find(1);
+var category = product.Category; // Loads category on access
+```
+
+**Requirements:** Configuration and proxies  
+**Warning:** May cause performance issues with large datasets
+
+## Data Seeding
+
+Used to insert initial data into the database.
+
+### Types of Seeding
+
+```csharp
+// Migration-based seeding
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    modelBuilder.Entity<Category>().HasData(
+        new Category { Id = 1, Name = "Electronics" },
+        new Category { Id = 2, Name = "Books" }
+    );
+}
+```
+
+## Inheritance Strategies
+
+### Table Per Hierarchy (TPH)
+- **Default strategy**
+- Single table with discriminator column
+- Best performance for queries
+
+### Table Per Type (TPT)
+- Separate table for each class
+- Uses joins when querying
+- Normalized data structure
+
+### Table Per Concrete Type (TPC)
+- Separate table for each concrete class
+- No table for base class
+- No joins required
+
+## Database First Approach
+
+Start with an existing database and generate EF Core models.
+
+### Using Scaffold-DbContext
+
+```bash
+Scaffold-DbContext "ConnectionString" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
+```
+
+This generates:
+- `DbContext` class
+- Entity classes
+- Relationships
+
+### Tools
+- `Scaffold-DbContext` command
+- **EF Core Power Tools** (Visual Studio extension)
+
+## Raw SQL Queries
+
+Execute raw SQL when needed for complex queries or stored procedures.
+
+```csharp
+// Query with FromSqlRaw
+var products = context.Products
+    .FromSqlRaw("SELECT * FROM Products WHERE Price > {0}", 100)
+    .ToList();
+
+// Query with FromSqlInterpolated
+var minPrice = 100;
+var products = context.Products
+    .FromSqlInterpolated($"SELECT * FROM Products WHERE Price > {minPrice}")
+    .ToList();
+
+// Execute commands
+context.Database.ExecuteSqlRaw("DELETE FROM Products WHERE Price < {0}", 10);
+```
+
+## Advanced Features
+
+### DbSet.Local
+Access tracked entities in memory without querying the database.
+
+```csharp
+var localProducts = context.Products.Local;
+```
+
+### Find()
+Searches first in memory, then queries the database if not found.
+
+```csharp
+var product = context.Products.Find(1);
+```
+
+## 🎯 Conclusion
+
+This guide provides a comprehensive foundation in Entity Framework Core, covering:
+
+- ✅ ORM concepts and fundamentals
+- ✅ Data access strategies
+- ✅ Mapping and relationships
+- ✅ Performance considerations
+- ✅ Real-world development practices
+
+Entity Framework Core helps developers build **clean**, **maintainable**, and **efficient** .NET applications with minimal boilerplate code.
+
+---
+
+## 📖 Additional Resources
+
+- [Official EF Core Documentation](https://docs.microsoft.com/en-us/ef/core/)
+- [EF Core GitHub Repository](https://github.com/dotnet/efcore)
+- [Entity Framework Tutorial](https://www.entityframeworktutorial.net/)
+
+## 📝 License
+
+This guide is provided for educational purposes.
+
+---
+
+**Happy Coding! 🚀**
